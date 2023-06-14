@@ -52,9 +52,9 @@ public class ArrayStack<E extends Cloneable> implements Stack<E>{
 
         @Override
         public Stack<E> clone() {
-            MyStack<E> clone = new MyStack<>();
+            ArrayStack<E> clone = new ArrayStack<>(this.capacity);
             clone.elements = elements.clone();
-            clone.size = head;
+            clone.head = this.head;
             return clone;
         }
 
