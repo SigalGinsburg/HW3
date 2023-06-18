@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50819497-749d-4bfe-a269-0b696dfb35f7" name="Changes" comment="INITIAL COMMIT">
+    <list default="true" id="50819497-749d-4bfe-a269-0b696dfb35f7" name="Changes" comment="first drafth of ArrayStack, pre testing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ArrayStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArrayStack.java" afterDir="false" />
     </list>
@@ -69,11 +69,19 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686764606541</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL‎-00004" summary="first drafth of ArrayStack, pre testing">
+      <created>1687085998783</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL‎-00004" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687085998783</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="INITIAL COMMIT" />
-    <option name="LAST_COMMIT_MESSAGE" value="INITIAL COMMIT" />
+    <MESSAGE value="first drafth of ArrayStack, pre testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="first drafth of ArrayStack, pre testing" />
   </component>
 </project>

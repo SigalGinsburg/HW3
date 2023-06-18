@@ -1,5 +1,4 @@
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ArrayStack<E extends Cloneable> implements Stack<E>{
@@ -55,7 +54,7 @@ public class ArrayStack<E extends Cloneable> implements Stack<E>{
         }
 
         @Override
-        public Stack<E> clone() {
+        public ArrayStack<E> clone() {
             ArrayStack<E> clone;
             try {
                 clone = (ArrayStack<E>) super.clone();
