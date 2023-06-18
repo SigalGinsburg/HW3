@@ -1,11 +1,15 @@
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class ArrayStack<E extends Cloneable> implements Stack<E>{
         private int capacity;
         private E[] elements;
         private int head;
 
-        public ArrayStack(int capacity) {
+        public ArrayStack(int capacity) throws NegativeCapacityException {
             if(capacity<0) {
-                throw new NegativeCapacityException;
+                throw new NegativeCapacityException();
             }
             this.capacity = capacity;
             elements = (E[]) new Object[capacity];
@@ -13,7 +17,7 @@ public class ArrayStack<E extends Cloneable> implements Stack<E>{
         }
 
         @Override
-        public void push(E element) {
+        public void push(E element){
             if (head == elements.length) {
                 throw new StackOverflowException();
             }
@@ -52,31 +56,50 @@ public class ArrayStack<E extends Cloneable> implements Stack<E>{
 
         @Override
         public Stack<E> clone() {
-            ArrayStack<E> clone = new ArrayStack<>(this.capacity);
-            clone.elements = elements.clone();
-            clone.head = this.head;
+            ArrayStack<E> clone;
+            try {
+                clone = (ArrayStack<E>) super.clone();
+            } catch (CloneNotSupportedException e) {
+                return null;
+            }
+            clone.elements = (E[]) new Object[this.capacity];
+            for (int i = 0; i <= this.head; i++) {
+                try {
+                    Method method = this.elements[i].getClass().getMethod("clone", null);
+                    method.setAccessible(true);
+                    clone.elements[i] = (E) method.invoke(elements[i]);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
             return clone;
         }
+        class StackIterator implements Iterator<E> {
+            private int currentIndex;
+            public StackIterator(int head){
+                this.currentIndex = head;
+            }
+        @Override
+        public boolean hasNext() {
+            return head >= 0;
+        }
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new StackOverflowException();
+            }
+            E next = elements[currentIndex];
+            currentIndex--;
+            return next;
+        }
+    }
 
         @Override
         public Iterator<E> iterator() {
-            return new Iterator<E>() {
-                private int currentIndex = head - 1;
-
-                @Override
-                public boolean hasNext() {
-                    return currentIndex >= 0;
-                }
-
-                @Override
-                public E next() {
-                    if (!hasNext()) {
-                        throw new NoSuchElementException("No more elements in the stack.");
-                    }
-                    return elements[currentIndex--];
-                }
-            };
+            Iterator<E> stackIterator= new StackIterator(this.head);
+            return stackIterator;
         }
     }
+
 
 
