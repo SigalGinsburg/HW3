@@ -3,53 +3,76 @@ public class Song implements Cloneable {
     private final String artist;
     private Genre genre;
     private int durationInSec;
-    public Song(String name,String artist,Genre genre,int durationInSec){
-        this.name=name;
-        this.artist=artist;
-        this.genre=genre;
-        this.durationInSec=durationInSec;
+
+    public Song(String name, String artist, Genre genre, int durationInSec) {
+        this.name = name;
+        this.artist = artist;
+        this.genre = genre;
+        this.durationInSec = durationInSec;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public int getDurationInSec() {
+        return durationInSec;
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-
+    protected Song clone()  {
+        try {
+            return (Song) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 
     @Override
     public String toString() {
-        System.out.print("(");
-        System.out.print(this.name+","+this.artist+","+this.genre+",");
-        this.durationToString();
-        System.out.print("),");
+        StringBuilder songString = new StringBuilder();
+        songString.append("(");
+        songString.append(this.name + "," + this.artist + "," + this.genre + ",");
+        songString.append(this.durationToString());
+        System.out.print(")");
+        String result= songString.toString();
+        return result;
     }
 
-    private void durationToString(){
-        int howManyMin= this.durationInSec/60;
-        int howManySec= this.durationInSec % 60;
-        System.out.print(howManyMin+":");
-        if (howManySec<=9){
-            System.out.print("0"+howManySec);
-        }
-        else {
-            System.out.print(howManySec);
-        }
-    }
-    private void printLast(){
+    private String durationToString() {
+        int howManyMin = this.durationInSec / 60;
+        int howManySec = this.durationInSec % 60;
+        StringBuilder durationString = new StringBuilder();
+        durationString.append(howManyMin);
+        durationString.append(":");
+        if (howManySec <= 9) {
+            durationString.append("0");
+            durationString.append("howManySec");
 
+        } else {
+            durationString.append(howManySec);
+        }
+        String result= durationString.toString();
+        return result;
     }
+
     @Override
-    public boolean equals(Song songToComper) {
-        if(this.name==songToComper.name&&this.artist==songToComper.artist){
-            return true;
+    public boolean equals(Object songToComper) {
+        if (songToComper instanceof Song) {
+            if (this.name.equals(((Song) songToComper).name) &&
+                    this.artist.equals(((Song) songToComper).artist)) {
+                return true;
+            }
         }
-        else {
-            return false;
-        }
-
+    return false;
     }
-
     @Override
     public int hashCode() {
+        //missing
     }
     public enum Genre {
         POP, ROCK, HIP_HOP, COUNTRY, JAZZ, DISCO
