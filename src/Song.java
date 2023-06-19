@@ -11,16 +11,19 @@ public class Song implements Cloneable {
         this.durationInSec = durationInSec;
     }
 
+    public String getName(){
+        return this.name;
+    }
     public String getArtist() {
-        return artist;
+        return this.artist;
     }
 
     public Genre getGenre() {
-        return genre;
+        return this.genre;
     }
 
     public int getDurationInSec() {
-        return durationInSec;
+        return this.durationInSec;
     }
 
     @Override
@@ -72,7 +75,8 @@ public class Song implements Cloneable {
     }
     @Override
     public int hashCode() {
-        //missing
+        int result= this.name.hashCode()+this.artist.hashCode()+this.durationInSec;
+        return result;
     }
     public enum Genre {
         POP, ROCK, HIP_HOP, COUNTRY, JAZZ, DISCO

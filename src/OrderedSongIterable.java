@@ -1,4 +1,5 @@
 
 public interface OrderedSongIterable extends Iterable<Song>{
-    private void setScanningOrder(ScanningOrder);
+    public void setScanningOrder(ScanningOrder scanningOrder);
+
 }

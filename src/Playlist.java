@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIterable {
@@ -7,18 +9,21 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
  private String filterArtist;
  private Song.Genre filterGenre;
  private int filterDuration;
+ private ScanningOrder order;
+
 
  public Playlist(){
   this.playlist=null;
   this.filterArtist=null;
   this.filterGenre=null;
+  this.order= ScanningOrder.ADDING;
   this.filterDuration=Integer.MAX_VALUE;
  }
 
  private void addSong (Song songToAdd){
   for(Song song:this.playlist){
     if (song.equals(songToAdd)){
-     //needs to add exception
+
      break;
     }
   }
@@ -66,22 +71,40 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
  }
 
  @Override
- public boolean equals(Object obj) {
-   //missing
-
+ public boolean equals(Object other) {
+  if (!(other instanceof Playlist)) {
+   return false;
+  }
+  Playlist otherPlayList = (Playlist) other;
+  if (this.length != otherPlayList.length){return false;}
+  ArrayList<Song> myOrderedList = (ArrayList<Song>) this.playlist.clone();
+  ArrayList<Song> otherOrderedList = (ArrayList<Song>) otherPlayList.playlist.clone();
+  setScanningOrderAux(otherOrderedList, ScanningOrder.NAME);
+  setScanningOrderAux(myOrderedList, ScanningOrder.NAME);
+  for(int i = 0; i < this.length; i++){
+   if (otherPlayList.playlist.get(i) != myOrderedList.get(i)){
+    return false;
+   }
+  }
+  return true;
  }
 
  @Override
  public int hashCode() {
-  //missing
+  int result=this.playlist.hashCode();
+  return result;
  }
 
+ public ArrayList<Song> getPlaylist() {
+  return playlist;
+ }
  @Override
  public Iterator<Song> iterator() {
   ArrayList<Song> newPlayList = (ArrayList<Song>) this.playlist.clone();
-  this.filterArtistAux(newPlayList);
-  this.filterGenreAux(newPlayList);
-  this.filterDurationAux(newPlayList);
+  filterArtistAux(newPlayList);
+  filterGenreAux(newPlayList);
+  filterDurationAux(newPlayList);
+  setScanningOrderAux(newPlayList, this.order);
   Iterator<Song> newPlayListIterator= new PlaylistIterator(newPlayList.iterator());
   return newPlayListIterator;
  }
@@ -99,6 +122,11 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
   this.filterDuration=duration;
  }
 
+ @Override
+ public void setScanningOrder(ScanningOrder order) {
+  this.order=order;
+ }
+
 
  private void filterArtistAux(ArrayList<Song> filteredByArtistPlaylist){
    for (Song song: filteredByArtistPlaylist){
@@ -113,6 +141,17 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
    if (!(song.getGenre().equals(this.filterGenre))){
     filteredByGenrePlaylist.remove(song);
    }
+  }
+ }
+
+ private void setScanningOrderAux(ArrayList<Song> orderedPlaylist, ScanningOrder order){
+  if(order==ScanningOrder.NAME){
+   Comparator<Song> byName = Comparator.comparing(Song::getName);
+   Collections.sort(orderedPlaylist, byName);
+  }
+  if (order==ScanningOrder.DURATION) {
+   Comparator<Song> byAge = Comparator.comparingInt(Song::getDurationInSec);
+   Collections.sort(orderedPlaylist, byAge);
   }
  }
 
