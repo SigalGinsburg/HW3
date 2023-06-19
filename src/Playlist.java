@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIterable {
  private ArrayList<Song> playlist;
- private int length= playlist.size();
  private String filterArtist;
  private Song.Genre filterGenre;
  private int filterDuration;
@@ -13,7 +12,7 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
 
 
  public Playlist(){
-  this.playlist=null;
+  this.playlist= new ArrayList<Song>();
   this.filterArtist=null;
   this.filterGenre=null;
   this.order= ScanningOrder.ADDING;
@@ -45,7 +44,7 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
    Playlist copy= (Playlist) super.clone();
    copy.playlist = new ArrayList<>(playlist.size());
    for(int i = 0; i < playlist.size(); i++){
-    copy.playlist.set(i, playlist.get(i).clone());
+    copy.playlist.add(playlist.get(i).clone());
    }
 //   copy.playlist=(ArrayList<Song>) playlist.clone();
    return copy;
@@ -59,11 +58,11 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
  public String toString() {
   StringBuilder playlistString = new StringBuilder();
   playlistString.append("[");
-  for (int i = 0; i < this.length - 1; i++) {
+  for (int i = 0; i < this.playlist.size() - 1; i++) {
    playlistString.append(playlist.get(i).toString());
    playlistString.append(",");
   }
-  playlistString.append(this.playlist.get(length - 1).toString());
+  playlistString.append(this.playlist.get(this.playlist.size() - 1).toString());
   playlistString.append("]");
   String result= playlistString.toString();
   return result;
@@ -75,12 +74,12 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
    return false;
   }
   Playlist otherPlayList = (Playlist) other;
-  if (this.length != otherPlayList.length){return false;}
+  if (this.playlist.size()  != otherPlayList.playlist.size()){return false;}
   ArrayList<Song> myOrderedList = (ArrayList<Song>) this.playlist.clone();
   ArrayList<Song> otherOrderedList = (ArrayList<Song>) otherPlayList.playlist.clone();
   setScanningOrderAux(otherOrderedList, ScanningOrder.NAME);
   setScanningOrderAux(myOrderedList, ScanningOrder.NAME);
-  for(int i = 0; i < this.length; i++){
+  for(int i = 0; i < this.playlist.size(); i++){
    if (otherPlayList.playlist.get(i) != myOrderedList.get(i)){
     return false;
    }
@@ -97,16 +96,7 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
  public ArrayList<Song> getPlaylist() {
   return playlist;
  }
- @Override
- public Iterator<Song> iterator() {
-  ArrayList<Song> newPlayList = (ArrayList<Song>) this.playlist.clone();
-  filterArtistAux(newPlayList);
-  filterGenreAux(newPlayList);
-  filterDurationAux(newPlayList);
-  setScanningOrderAux(newPlayList, this.order);
-  Iterator<Song> newPlayListIterator= new PlaylistIterator(newPlayList.iterator());
-  return newPlayListIterator;
- }
+
 
  @Override
  public void filterArtist(String artist) {
@@ -128,7 +118,7 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
 
 
  private void filterArtistAux(ArrayList<Song> filteredByArtistPlaylist){
-   for (Song song: filteredByArtistPlaylist){
+   for (Song song: this.playlist){
       if (!(song.getArtist().equals(this.filterArtist))){
          filteredByArtistPlaylist.remove(song);
     }
@@ -136,7 +126,7 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
  }
 
  private void filterGenreAux(ArrayList<Song> filteredByGenrePlaylist){
-  for (Song song: filteredByGenrePlaylist){
+  for (Song song: this.playlist){
    if (!(song.getGenre().equals(this.filterGenre))){
     filteredByGenrePlaylist.remove(song);
    }
@@ -155,12 +145,27 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
  }
 
  private void filterDurationAux(ArrayList<Song> filteredByDurationPlaylist){
-  for (Song song: filteredByDurationPlaylist){
+  for (Song song: this.playlist){
    if (song.getDurationInSec() > this.filterDuration){
      filteredByDurationPlaylist.remove(song);
    }
   }
  }
+ @Override
+ public Iterator<Song> iterator() {
+
+  if (this.playlist ==null) {
+      return null;
+  }
+  ArrayList<Song> newPlayList = (ArrayList<Song>) this.playlist.clone();
+  filterArtistAux(newPlayList);
+  filterGenreAux(newPlayList);
+  filterDurationAux(newPlayList);
+  setScanningOrderAux(newPlayList, this.order);
+  Iterator<Song> newPlayListIterator= new PlaylistIterator(newPlayList.iterator());
+  return newPlayListIterator;
+ }
+
  public class PlaylistIterator implements Iterator<Song>{
   private Iterator<Song> iterator;
   public PlaylistIterator(Iterator iterator){
