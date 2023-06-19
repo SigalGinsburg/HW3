@@ -26,6 +26,15 @@ public class Song implements Cloneable {
         return this.durationInSec;
     }
 
+    public void setDuration(int durationInSec) {
+        this.durationInSec = durationInSec;
+    }
+
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
     @Override
     protected Song clone()  {
         try {

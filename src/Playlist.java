@@ -20,17 +20,16 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
   this.filterDuration=Integer.MAX_VALUE;
  }
 
- private void addSong (Song songToAdd){
+ public void addSong (Song songToAdd){
   for(Song song:this.playlist){
     if (song.equals(songToAdd)){
-
-     break;
+     throw new SongAlreadyExistsException();
     }
   }
   this.playlist.add(songToAdd);
  }
 
- private boolean removeSong (Song songToRemove) {
+ public boolean removeSong (Song songToRemove) {
   for (Song song : this.playlist) {
    if (song.equals(songToRemove)) {
     this.playlist.remove(songToRemove);
