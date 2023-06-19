@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50819497-749d-4bfe-a269-0b696dfb35f7" name="Changes" comment="19/6">
+    <list default="true" id="50819497-749d-4bfe-a269-0b696dfb35f7" name="Changes" comment="first drafth of ArrayStack, pre testing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ArrayStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ArrayStack.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,13 +37,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/DELL/school/software engineering/check&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/IdeaProjects/HW3&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -55,7 +48,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686753387660</updated>
-      <workItem from="1686986168632" duration="41162000" />
     </task>
     <task id="LOCAL‎-00001" summary="INITIAL COMMIT">
       <created>1686753964825</created>
@@ -72,36 +64,46 @@
       <updated>1686764476693</updated>
     </task>
     <task id="LOCAL‎-00003" summary="INITIAL COMMIT">
-      <created>1687014582265</created>
+      <created>1686764606541</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL‎-00003" />
       <option name="project" value="LOCAL‎" />
-      <updated>1687014582265</updated>
+      <updated>1686764606541</updated>
     </task>
-    <task id="LOCAL‎-00004" summary="18/06">
-      <created>1687115275173</created>
+    <task id="LOCAL‎-00004" summary="first drafth of ArrayStack, pre testing">
+      <created>1687085998783</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL‎-00004" />
       <option name="project" value="LOCAL‎" />
-      <updated>1687115275173</updated>
+      <updated>1687085998783</updated>
     </task>
-    <task id="LOCAL‎-00005" summary="19/6">
-      <created>1687193912922</created>
+    <task id="LOCAL‎-00005" summary="first drafth of ArrayStack, pre testing">
+      <created>1687087640272</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL‎-00005" />
       <option name="project" value="LOCAL‎" />
-      <updated>1687193912922</updated>
+      <updated>1687087640272</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="first drafth of ArrayStack, pre testing">
+      <created>1687100397692</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687100397692</updated>
+    </task>
+    <task id="LOCAL‎-00007" summary="first drafth of ArrayStack, pre testing">
+      <created>1687194841666</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL‎-00007" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1687194841666</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="INITIAL COMMIT" />
-    <MESSAGE value="18/06" />
-    <MESSAGE value="19/6" />
-    <option name="LAST_COMMIT_MESSAGE" value="19/6" />
+    <MESSAGE value="first drafth of ArrayStack, pre testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="first drafth of ArrayStack, pre testing" />
   </component>
 </project>

@@ -1,9 +1,10 @@
 import java.lang.reflect.Method;
+import java.sql.Array;
 import java.util.Iterator;
 
 public class ArrayStack<E extends Cloneable> implements Stack<E>{
         private int capacity;
-        private E[] elements;
+        private Object[] elements;
         private int head;
 
         public ArrayStack(int capacity) throws NegativeCapacityException {
@@ -11,13 +12,13 @@ public class ArrayStack<E extends Cloneable> implements Stack<E>{
                 throw new NegativeCapacityException();
             }
             this.capacity = capacity;
-            elements = (E[]) new Object[capacity];
+            this.elements = new Object[capacity];
             head = -1;
         }
 
         @Override
         public void push(E element){
-            if (head == elements.length) {
+            if (head == elements.length-1) {
                 throw new StackOverflowException();
             }
             head++;
@@ -29,7 +30,7 @@ public class ArrayStack<E extends Cloneable> implements Stack<E>{
             if (isEmpty()) {
                 throw new EmptyStackException();
             }
-            E element = elements[head];
+            E element = (E) elements[head];
             elements[head] = null;
             head--;
             return element;
@@ -40,7 +41,7 @@ public class ArrayStack<E extends Cloneable> implements Stack<E>{
             if (isEmpty()) {
                 throw new EmptyStackException();
             }
-            return elements[head];
+            return (E)elements[head];
         }
 
         @Override
@@ -61,7 +62,7 @@ public class ArrayStack<E extends Cloneable> implements Stack<E>{
             } catch (CloneNotSupportedException e) {
                 return null;
             }
-            clone.elements = (E[]) new Object[this.capacity];
+            clone.elements = new Object[this.capacity];
             for (int i = 0; i <= this.head; i++) {
                 try {
                     Method method = this.elements[i].getClass().getMethod("clone", null);
@@ -80,14 +81,14 @@ public class ArrayStack<E extends Cloneable> implements Stack<E>{
             }
         @Override
         public boolean hasNext() {
-            return head >= 0;
+            return currentIndex >= 0;
         }
         @Override
         public E next() {
             if (!hasNext()) {
                 throw new StackOverflowException();
             }
-            E next = elements[currentIndex];
+            E next = (E)elements[currentIndex];
             currentIndex--;
             return next;
         }
