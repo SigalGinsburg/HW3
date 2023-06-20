@@ -47,10 +47,8 @@ public class Song implements Cloneable {
     @Override
     public String toString() {
         StringBuilder songString = new StringBuilder();
-        songString.append("(");
-        songString.append(this.name + "," + this.artist + "," + this.genre + ",");
+        songString.append(this.name + ", " + this.artist + ", " + this.genre + ", ");
         songString.append(this.durationToString());
-        System.out.print(")");
         String result= songString.toString();
         return result;
     }
@@ -63,7 +61,7 @@ public class Song implements Cloneable {
         durationString.append(":");
         if (howManySec <= 9) {
             durationString.append("0");
-            durationString.append("howManySec");
+            durationString.append(howManySec);
 
         } else {
             durationString.append(howManySec);
@@ -84,7 +82,7 @@ public class Song implements Cloneable {
     }
     @Override
     public int hashCode() {
-        int result= this.name.hashCode()+this.artist.hashCode()+this.durationInSec;
+        int result= this.name.hashCode()+this.artist.hashCode();//+this.durationInSec;
         return result;
     }
     public enum Genre {

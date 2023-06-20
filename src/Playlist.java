@@ -59,10 +59,14 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
   StringBuilder playlistString = new StringBuilder();
   playlistString.append("[");
   for (int i = 0; i < this.playlist.size() - 1; i++) {
+   playlistString.append("(");
    playlistString.append(playlist.get(i).toString());
-   playlistString.append(",");
+   playlistString.append(")");
+   playlistString.append(", ");
   }
+  playlistString.append("(");
   playlistString.append(this.playlist.get(this.playlist.size() - 1).toString());
+  playlistString.append(")");
   playlistString.append("]");
   String result= playlistString.toString();
   return result;
@@ -80,7 +84,9 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
   setScanningOrderAux(otherOrderedList, ScanningOrder.NAME);
   setScanningOrderAux(myOrderedList, ScanningOrder.NAME);
   for(int i = 0; i < this.playlist.size(); i++){
-   if (otherPlayList.playlist.get(i) != myOrderedList.get(i)){
+   Song otherSong= otherOrderedList.get(i);
+   Song mySong= myOrderedList.get(i);
+   if (!otherSong.equals(mySong)){
     return false;
    }
   }
@@ -89,7 +95,9 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
 
  @Override
  public int hashCode() {
-  int result=this.playlist.hashCode();
+  ArrayList<Song> tmp = (ArrayList<Song>) playlist.clone();
+  setScanningOrderAux(tmp, ScanningOrder.NAME);
+  int result= tmp.hashCode();
   return result;
  }
 
@@ -118,7 +126,8 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
 
 
  private void filterArtistAux(ArrayList<Song> filteredByArtistPlaylist){
-   for (Song song: this.playlist){
+  if (this.filterArtist==null){ return;}
+  for (Song song: this.playlist){
       if (!(song.getArtist().equals(this.filterArtist))){
          filteredByArtistPlaylist.remove(song);
     }
@@ -126,6 +135,7 @@ public class Playlist implements Cloneable, OrderedSongIterable,FilteredSongIter
  }
 
  private void filterGenreAux(ArrayList<Song> filteredByGenrePlaylist){
+  if (this.filterGenre==null){ return;}
   for (Song song: this.playlist){
    if (!(song.getGenre().equals(this.filterGenre))){
     filteredByGenrePlaylist.remove(song);
