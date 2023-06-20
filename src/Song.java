@@ -17,24 +17,17 @@ public class Song implements Cloneable {
     public String getArtist() {
         return this.artist;
     }
-
     public Genre getGenre() {
         return this.genre;
     }
-
     public int getDurationInSec() {
         return this.durationInSec;
     }
-
     public void setDuration(int durationInSec) {
         this.durationInSec = durationInSec;
     }
 
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
+    /** this function implements a deep copy of a song **/
     @Override
     protected Song clone()  {
         try {
@@ -44,15 +37,20 @@ public class Song implements Cloneable {
         }
     }
 
+    /**
+     * this function creates to 'this' song a string that represents it.
+     * @return the string.
+     */
     @Override
     public String toString() {
         StringBuilder songString = new StringBuilder();
         songString.append(this.name + ", " + this.artist + ", " + this.genre + ", ");
-        songString.append(this.durationToString());
+        songString.append(this.durationToString()); //help function that creates a string for the duration of the song
         String result= songString.toString();
         return result;
     }
 
+    /** An helper function for 'toString' function. **/
     private String durationToString() {
         int howManyMin = this.durationInSec / 60;
         int howManySec = this.durationInSec % 60;
