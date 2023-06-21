@@ -17,24 +17,17 @@ public class Song implements Cloneable {
     public String getArtist() {
         return this.artist;
     }
-
     public Genre getGenre() {
         return this.genre;
     }
-
     public int getDurationInSec() {
         return this.durationInSec;
     }
-
     public void setDuration(int durationInSec) {
         this.durationInSec = durationInSec;
     }
 
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
+    /** deep copy of a song, as we learned to implement in the course **/
     @Override
     protected Song clone()  {
         try {
@@ -44,23 +37,29 @@ public class Song implements Cloneable {
         }
     }
 
+    /**
+     * this function creates to 'this' song a string that represents it.
+     * @return the string.
+     */
     @Override
     public String toString() {
         StringBuilder songString = new StringBuilder();
-        songString.append(this.name + ", " + this.artist + ", " + this.genre + ", ");
-        songString.append(this.durationToString());
+        songString.append(this.name + ", " + this.artist + ", " + this.genre + ", "); //creating the string as directed
+        songString.append(this.durationToString()); //help function that creates a string for the duration of the song
         String result= songString.toString();
         return result;
     }
 
+    /** An helper function for 'toString' function. **/
     private String durationToString() {
-        int howManyMin = this.durationInSec / 60;
-        int howManySec = this.durationInSec % 60;
+        // changing the value to min:sec display
+        int howManyMin = this.durationInSec / 60; // how many minutes
+        int howManySec = this.durationInSec % 60; // how many seconds
         StringBuilder durationString = new StringBuilder();
         durationString.append(howManyMin);
         durationString.append(":");
         if (howManySec <= 9) {
-            durationString.append("0");
+            durationString.append("0"); //adding zero if necessary
             durationString.append(howManySec);
 
         } else {
@@ -70,6 +69,11 @@ public class Song implements Cloneable {
         return result;
     }
 
+    /**
+     * checks whether two songs are equals i.e. same song's name and the same artist.
+     * @param songToComper the song that is compared to 'this' song
+     * @return boolean answer
+     */
     @Override
     public boolean equals(Object songToComper) {
         if (songToComper instanceof Song) {
